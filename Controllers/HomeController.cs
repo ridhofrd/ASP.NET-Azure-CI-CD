@@ -34,11 +34,9 @@ public class HomeController : Controller
             return View("Index");
         }
 
-        // 1. Mengunggah File ke Object Storage
         var containerClient = _blobServiceClient.GetBlobContainerClient(_containerName);
-        await containerClient.CreateIfNotExistsAsync(PublicAccessType.Blob); // Pastikan container publik
+        await containerClient.CreateIfNotExistsAsync(PublicAccessType.Blob); 
 
-        // Buat nama file unik agar tidak bentrok
         string fileName = Guid.NewGuid().ToString() + Path.GetExtension(fotoKtp.FileName);
         var blobClient = containerClient.GetBlobClient(fileName);
 
@@ -47,10 +45,8 @@ public class HomeController : Controller
             await blobClient.UploadAsync(stream, new BlobHttpHeaders { ContentType = fotoKtp.ContentType });
         }
 
-        // Dapatkan URL Publik
         string ktpUrl = blobClient.Uri.ToString();
 
-        // 2. Menyimpan Teks ke Database
         var transaksiBaru = new Transaksi
         {
             NomorKendaraan = nomorKendaraan,
