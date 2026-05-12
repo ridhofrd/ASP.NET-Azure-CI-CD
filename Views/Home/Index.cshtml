@@ -1,0 +1,85 @@
+@{
+    ViewData["Title"] = "Transaksi";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0 rounded-lg">
+                <div class="card-header bg-primary text-white text-center py-4">
+                    <h3 class="mb-0 fw-bold">Portal Transaksi</h3>
+                </div>
+                <div class="card-body p-5 bg-light">
+
+                    @if (ViewBag.Message != null)
+                    {
+                        <div class="alert alert-info shadow-sm">
+                            @ViewBag.Message
+                        </div>
+                    }
+
+                    @if (ViewBag.KtpUrl != null)
+                    {
+                        <div class="alert alert-success shadow-sm">
+                            <strong>Berhasil Disimpan!</strong><br/>
+                            URL KTP: <a href="@ViewBag.KtpUrl" target="_blank" class="text-break">@ViewBag.KtpUrl</a>
+                            <div class="mt-3 text-center">
+                                <img src="@ViewBag.KtpUrl" alt="Foto KTP" class="img-fluid rounded border border-2 border-success" style="max-height: 200px;" />
+                            </div>
+                        </div>
+                    }
+
+                    <form asp-action="SubmitForm" method="post" enctype="multipart/form-data">
+                        <div class="mb-4">
+                            <label for="nomorKendaraan" class="form-label fw-semibold text-secondary">Nomor Kendaraan</label>
+                            <input type="text" class="form-control form-control-lg shadow-sm" id="nomorKendaraan" name="nomorKendaraan" placeholder="Masukkan Nomor Kendaraan" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="satker" class="form-label fw-semibold text-secondary">Satker</label>
+                            <input type="text" class="form-control form-control-lg shadow-sm" id="satker" name="satker" placeholder="Masukkan Satker" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="nomorKupon" class="form-label fw-semibold text-secondary">Nomor Kupon</label>
+                            <input type="text" class="form-control form-control-lg shadow-sm" id="nomorKupon" name="nomorKupon" placeholder="Masukkan Nomor Kupon" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="fotoKtp" class="form-label fw-semibold text-secondary">Unggah Foto Kupon yang Digunakan Untuk Transaksi</label>
+                            <input type="file" class="form-control form-control-lg shadow-sm" id="fotoKtp" name="fotoKtp" accept="image/*" required>
+                            <div class="form-text text-muted mt-2"><small><i class="bi bi-info-circle"></i> File akan disimpan aman di Cloud Object Storage.</small></div>
+                        </div>
+                        <div class="d-grid gap-2 mt-5">
+                            <button type="submit" class="btn btn-primary btn-lg fw-bold shadow">Kirim Transaksi</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #f4f7f6;
+        font-family: 'Inter', sans-serif;
+    }
+    .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 1rem 3rem rgba(0,0,0,.175)!important;
+    }
+    .btn-primary {
+        background: linear-gradient(135deg, #0d6efd, #0a58ca);
+        border: none;
+        transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+        background: linear-gradient(135deg, #0a58ca, #084298);
+        transform: scale(1.02);
+    }
+    .form-control:focus {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+</style>
