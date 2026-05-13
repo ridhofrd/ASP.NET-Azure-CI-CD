@@ -24,7 +24,7 @@ jobs:
       with:
         context: .
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/portal-pegawai:latest
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/ci-cd-azure:latest
 
     - name: Azure Login
       uses: azure/login@v2
@@ -36,4 +36,4 @@ jobs:
       with:
         containerAppName: ${{ secrets.CONTAINER_APP_NAME }}
         resourceGroup: ${{ secrets.RESOURCE_GROUP }}
-        imageToDeploy: ${{ secrets.DOCKERHUB_USERNAME }}/portal-pegawai:latest
+        imageToDeploy: ${{ secrets.DOCKERHUB_USERNAME }}/ci-cd-azure:latest
